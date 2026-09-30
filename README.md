@@ -1,70 +1,87 @@
-# SoccerDiffusion 
-⚽ SoccerDiffusion: Modeling Football Possession Dynamics Using Fractional Brownian Motion
-Welcome to the public repository for the SoccerDiffusion project. This work explores how ball movement patterns in football can be modeled using fractional Brownian motion (fBm) and characterized through the Hurst exponent (H) — a statistical measure of persistence in time series.
+# SoccerDiffusion
 
-Our objective is to estimate the Hurst exponent from possession sequences and understand how it varies in response to match events such as goals, red cards, or defensive pressure. The project combines synthetic data generation, machine learning models, and real match analysis to provide new tactical insights for football analytics.
+⚽ **Modeling football possession dynamics using fractional Brownian motion**
+
+> **Team project** developed for the course Project III, Bachelor's Degree in Data Science (Universitat Politècnica de València). Original repository: [ghursan/SoccerDiffusion](https://github.com/ghursan/SoccerDiffusion).
+
+This project explores how ball-movement patterns in football can be modeled with fractional Brownian motion (fBm) and characterized through the **Hurst exponent (H)**, a statistical measure of persistence in time series.
+
+The goal is to estimate the Hurst exponent from possession sequences and to understand how it changes in response to match events such as goals, red cards or defensive pressure. The project combines synthetic data generation, machine learning and real match analysis to provide new tactical insights for football analytics.
 
 ---
 
-📁 Repository Structure
-The contents of this repository are organized as follows:
-├── data/ # CSV files used for model training and evaluation
-├── notebooks/ # All Jupyter notebooks with code for data processing, modeling, and evaluation
-├── information/ # Project documents and references
-│ ├── StatsBomb PDFs/ # Official data documentation
-│ ├── M1-SOCCERDIFFUSION.pdf; # Link to our initial presentation (milestone 1)
-│ ├── M2-SOCCER DIFFUSION.pdf # Milestone 2 report
-│ └── Final_memory.pdf # Final project write-up
-├── web/ # Full website code (HTML, CSS, Python backend)
-└── README.md # This file 
+## Project highlights
 
-Project Highlights
-Synthetic Data Generation: We created 50,000 football possessions using fractional Brownian motion, each labeled with a known Hurst exponent.
-Feature Engineering: Extracted movement features (speed, acceleration, angles, etc.) from possessions.
-Machine Learning: Trained models (XGBoost, Random Forest, Linear Regression, MLP, LSTM) to predict the Hurst exponent based on possession features.
-Event Analysis: Applied the best-performing model (XGBoost) to real FC Barcelona matches from the 2019/2020 LaLiga season and analyzed how $H$ changes in response to:
-Goals
-Red cards
-Substitutions
-Defensive pressure
-Web Visualization: A lightweight website was built to showcase project results and interactive visualizations.
+- **Synthetic data generation:** 50,000 football possessions generated with fractional Brownian motion, each labeled with a known Hurst exponent.
+- **Feature engineering:** movement features (speed, acceleration, angles, etc.) extracted from each possession.
+- **Machine learning:** XGBoost, Random Forest, Linear Regression, MLP and LSTM models trained to predict the Hurst exponent from possession features.
+- **Event analysis:** the best-performing model (XGBoost) applied to real FC Barcelona matches from the 2019/2020 LaLiga season (StatsBomb open data), analysing how *H* changes in response to:
+  - goals
+  - red cards
+  - substitutions
+  - defensive pressure
+- **Web visualization:** a lightweight Flask website that presents the project and its results.
 
-💻 How to Run the Project
+## Repository structure
+
+```text
+SoccerDiffusion/
+├── data/
+│   └── posesiones_sinteticas.csv     # Synthetic possessions used for training and evaluation
+├── notebooks/
+│   ├── artificial_data.ipynb         # Synthetic data generation and model training
+│   ├── codigo_proyecto.ipynb         # Real match processing and event analysis
+│   └── pruebas*.ipynb                # Exploratory notebooks
+├── information/
+│   ├── Statsboms PDF/                # StatsBomb data documentation
+│   ├── M1-SOCCER DIFFUSION.pdf       # Milestone 1 presentation
+│   ├── M2-SOCCER DIFFUSION.pdf       # Milestone 2 report
+│   ├── Final_memory.pdf              # Final project report
+│   └── *.pdf                         # Reference papers
+├── web/
+│   ├── app.py                        # Flask application
+│   ├── templates/                    # HTML templates
+│   └── static/                       # CSS, images and videos
+├── requirements.txt
+└── README.md
+```
+
+## How to run
+
 1. Clone the repository:
-   git clone https://github.com/yourusername/SoccerDiffusion.git
+   ```bash
+   git clone https://github.com/ivangarciadonderis/SoccerDiffusion.git
    cd SoccerDiffusion
-2. Install required dependencies:
+   ```
+2. Install the dependencies (a virtual environment is recommended):
+   ```bash
    pip install -r requirements.txt
-3. Explore the notebooks in /jupyter notebooks:
-   pruebas
-   pruebas2
-   pruebas3
-   artificial_data
-   codigo_proyecto
+   ```
+3. Open the notebooks in `notebooks/`. The main ones are:
+   - `artificial_data.ipynb`: synthetic possessions and model training.
+   - `codigo_proyecto.ipynb`: application to real StatsBomb matches and event analysis.
 
-Run the website (optional, requires Flask):
+### Website
+
+```bash
 cd web
+python app.py
+```
 
-🌐 Website
-We also provide a public-facing website (code in Pagina web/) that allows users to explore:
+Then open `http://127.0.0.1:5000` in your browser.
 
-The concept of the Hurst exponent in football
+## Documentation
 
-Interactive possession visualizations
+Methodology, results and evaluation are described in:
 
-Match-level insights based on estimated $H$ values
+- [`information/M1-SOCCER DIFFUSION.pdf`](information/M1-SOCCER%20DIFFUSION.pdf)
+- [`information/M2-SOCCER DIFFUSION.pdf`](information/M2-SOCCER%20DIFFUSION.pdf)
+- [`information/Final_memory.pdf`](information/Final_memory.pdf)
 
-📘 Documentation
-Detailed explanations, methodology, and evaluations can be found in:
+## Data
 
-/Information/M1-SOCCERDIFFUSION.pdf
+Real match data comes from [StatsBomb Open Data](https://github.com/statsbomb/open-data), accessed with the `statsbombpy` package.
 
-/Information/M2-SOCCER DIFFUSION.pdf
+## License
 
-/Information/Final_memory.pdf
-
-📄 License
-This project is licensed under the MIT License. Feel free to reuse and adapt for research or educational purposes.
-
-📫 Contact
-For any questions or collaboration ideas, feel free to reach out via the Issues tab or open a pull request.
+This project is licensed under the [MIT License](LICENSE).
